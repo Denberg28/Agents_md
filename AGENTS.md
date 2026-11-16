@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Version: 1.2 | Updated: 17 November 2026
+Version: 1.3 | Updated: 17 November 2026
 
 ## Purpose and priorities
 
@@ -66,6 +66,20 @@ Before editing, locate the authoritative symbol/selector and its usages, inspect
 Keep a compact manual-edit guide in the README for small projects, or `docs/CODE_EDIT_GUIDE.md` as the project grows. Update only entries affected by the work. Use a table with **desired result | file | section/symbol/property | edit and units/scope | related settings and check**. Cover common tuning points, rather than inventorying every function. Reference stable symbols or headings; line numbers are optional navigation aids tied to a commit and must never be the only locator. Documentation must describe actual implemented settings.
 
 For delivery, briefly identify where the requested result is controlled and how it was checked. Inspect the final diff for unintended changes; use the existing formatter/linter and affected checks proportionally. For a cosmetic edit, verify the affected layout/states where possible; do not add elaborate tests that merely mirror styling. State any preview/device verification limits.
+
+## 2.2. Minimal structure, auditability, and conflict prevention
+
+Use the smallest clear implementation that satisfies the agreed behavior, failure/recovery paths, and checks. Minimize concepts, coupling, duplication, and edit surface. Do not optimize for the fewest lines: dense expressions, omitted validation, giant files, or excessive tiny modules make review harder. Use line counts and complexity warnings as investigation signals, not arbitrary acceptance quotas.
+
+- Give each module/component one coherent responsibility. Keep dependencies explicit and directional; avoid circular imports and hidden cross-module mutation. State who owns shared state and which functions may change it. Keep calculation/validation separate from side effects where practical.
+- Extend the existing implementation before adding a parallel path. Keep one authoritative definition for each setting, rule, schema, and state transition. Share code when behavior is truly shared; do not force unrelated behavior into a generic abstraction. Add a dependency or layer only when it solves a concrete present need.
+- Use concise section comments to explain purpose, the intended edit/result, and non-obvious constraints or checks. Names and code express mechanics. Keep comments accurate in the same patch; keep change history in version control.
+- Before implementation, identify the smallest affected modules and shared interfaces. Keep each change/commit about one behavior or tightly related outcome. Separate optional refactors and formatting from feature/fix work; include a structural change only when required for the requested result.
+- When concurrent work is already authorized, assign distinct edit areas and coordinate shared files/interfaces before changes. This rule does not authorize additional agents. Integrate small changes frequently through the repository workflow. Resolve conflicts against both intended behaviors and current source; never blindly choose an entire side. Rerun affected checks on the integrated result.
+- Remove obsolete code from replaced paths only after checking callers, supported compatibility, and external entry points. Avoid accumulating abandoned alternatives, disabled implementations, or speculative extension points. Keep unrelated cleanup separate.
+- Keep an audit trail proportional to the change: requested outcome -> controlling file/section/symbol -> focused diff -> actual verification -> source commit. Reuse the README/edit guide, commit/PR description, and test evidence; do not create a second audit system or duplicate the same narrative across documents.
+
+Review before delivery: Can a maintainer locate the controlling setting, trace input through logic to output, identify state changes and side effects, and verify the result? Is new structure necessary, and is the diff limited to the complete requested change? If a simple adjustment crosses many modules, inspect coupling and explain the dependency before expanding scope. Paragraph headings help navigation; clear boundaries and coordinated edits reduce conflicts, but cannot guarantee their absence.
 
 ## 3. Reproducible setup and CI/CD
 
