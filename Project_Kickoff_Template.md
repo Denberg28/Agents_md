@@ -1,8 +1,8 @@
 # Optimized Project Kickoff Template
 
-Version: 1.0 | 6 October 2026
+Version: 1.1 | 17 November 2026
 
-Replace the brackets, attach relevant files, and paste the prompt below. Use “recommend” for unknowns; omit fields that do not apply. Keep detailed operating rules in AGENTS.md.
+Replace the brackets, attach relevant files, and paste the prompt below. Use “recommend” for unknowns; omit fields that do not apply. Keep detailed operating rules in AGENTS.md. The code-section rule below helps both manual edits and future development.
 
 ```text
 Build or improve [PROJECT NAME].
@@ -19,7 +19,7 @@ Authorized delivery: [Local artifacts / push branch / draft PR / private test ca
 
 Act as my lead developer and systems engineer. Carry this work from definition to the authorized deliverable. Prefer free-first, lightweight, maintainable solutions. Choose sensible defaults for reversible decisions, record assumptions, and complete unblocked work without repeated confirmation.
 
-Follow the target repository's applicable AGENTS.md. For a new repository, use https://github.com/Denberg28/Agents_md/blob/main/AGENTS.md as the starting rules when accessible. Preserve project-specific instructions. If unavailable, report that limitation and follow the workflow below.
+Follow the target repository's applicable AGENTS.md. For a new repository, use https://github.com/Denberg28/Agents_md/blob/main/AGENTS.md as the starting rules when accessible. Preserve project-specific instructions. For existing repositories, review that shared reference when accessible and incorporate relevant improvements into local instructions while preserving project-specific rules; do not blindly replace them. If unavailable, report that limitation and follow the workflow below.
 
 1. Define: Inspect existing work. Produce a short specification, user flow, MVP/non-goals, interfaces, failure/recovery behavior, and measurable acceptance criteria. Confirm the exact repository and preserve the known-good baseline.
 
@@ -27,7 +27,9 @@ Follow the target repository's applicable AGENTS.md. For a new repository, use h
 
 3. Implement: Make focused, reviewable changes and complete user flows. Diagnose before changing interacting layers. Preserve working behavior and compatibility across affected apps, firmware, protocols, and hardware.
 
-4. Verify: Review and sanitize the change. Run applicable build, functional, integration, regression, security, and packaging checks. Required failures block promotion. Record PASS, FAIL, NOT TESTED, or BLOCKED with evidence; explain N/A checks.
+Code organization and manual edits: Write authored code in readable, paragraph-like sections using normal language formatting, meaningful blank lines, a searchable section heading, and a short comment explaining what to change to get a particular result. For example: UI — Theme colors (shared accent/background), UI — Spacing (padding inside, margin/gap outside), and UI — Typography (font size/weight). Put repeated tunable values in the existing authoritative theme/configuration and explain units, scope, and relevant dependencies. Use native functions/components/modules; keep comments concise and valid for the language. Document formats without comments beside their source. Edit source files and regenerate generated output through the existing workflow. Apply this gradually to new or meaningfully changed sections, avoiding unrelated reformatting or restructuring. Locate the controlling setting and its usages, make a focused patch, and inspect the diff; explain any necessary wider refactor. Maintain a compact manual-edit table in README or docs/CODE_EDIT_GUIDE.md with desired result, file, stable section/symbol/property, edit/units/scope, related settings, and verification. Use line numbers only as optional commit-specific aids. End with the relevant edit locations and actual checks. Preserve theme/accessibility/layout behavior, and validate control or safety limits before changing them.
+
+4. Verify: Review and sanitize the change; inspect the diff for unintended rewrites and check that edit guidance matches actual code. Run applicable build, functional, integration, regression, security, and packaging checks. Required failures block promotion. Record PASS, FAIL, NOT TESTED, or BLOCKED with evidence; explain N/A checks.
 
 5. Validate hardware when applicable: Define control authority, takeover, safe outputs, command freshness, watchdogs, and recovery. Test the real signal path and relevant link/device/lifecycle faults. Measure against acceptance criteria. If equipment is unavailable, provide a runnable HIL procedure and mark required checks BLOCKED.
 
