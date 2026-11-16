@@ -1,6 +1,6 @@
 # Optimized Project Kickoff Template
 
-Version: 1.2 | 17 November 2026
+Version: 1.3 | 17 November 2026
 
 Replace the brackets, attach relevant files, and paste the prompt below. Use “recommend” for unknowns; omit fields that do not apply. Keep detailed operating rules in AGENTS.md. The code-section rule below helps both manual edits and future development.
 
@@ -34,6 +34,8 @@ Minimal structure and auditability: Use the smallest clear implementation that s
 Focused changes and conflict prevention: Identify the controlling symbols, usages, affected modules, and shared interfaces before editing. Make the smallest complete patch; keep optional refactors/formatting separate. If concurrent work is authorized, coordinate shared files and integrate small changes through the repository workflow; resolve conflicts using both intended behaviors and rerun affected checks. Do not introduce additional agents without authorization. Remove obsolete replaced paths only after checking callers and compatibility. Explain any necessary wider change.
 
 Manual-edit and audit record: Maintain a compact table in README or docs/CODE_EDIT_GUIDE.md: desired result | file | stable section/symbol/property | edit, units and scope | related settings and check. Use line numbers only as optional commit-specific aids. Reuse that guide and existing commit/PR/test records to trace each requested outcome to its controlling code, focused diff, actual verification, and source commit. Keep documentation proportional. Preserve theme/accessibility/layout behavior and validate control or safety limits before changing them.
+
+Efficient GPT usage: Reuse current context, decisions, environments, and valid evidence. Search targeted files/symbols, batch independent operations, keep dependent/conflicting writes sequential, and use bounded output, deterministic tools, incremental builds, and concise updates. Run affected checks during development and required final gates; repeat passing work only when changes or unresolved evidence justify it. Repeated failure requires new diagnosis. Honor selected model/settings; change controls only when exposed and authorized. Never invent remaining allowance/reset times, promise exact savings, or add agents/spending under this rule. For long work or handoff, maintain one compact checkpoint with scope/authorization, branch/commit, uncommitted work, decisions, checks/evidence, blockers, and next executable step. Resume from verified current state. If a real limit blocks progress, preserve work and report what remains; do not promise automatic resumption. Complete the authorized outcome whenever unblocked.
 
 4. Verify: Review and sanitize the change; inspect the diff for unintended rewrites and check that edit guidance matches actual code. Run applicable build, functional, integration, regression, security, and packaging checks. Required failures block promotion. Record PASS, FAIL, NOT TESTED, or BLOCKED with evidence; explain N/A checks.
 
