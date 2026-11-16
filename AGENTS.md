@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Version: 1.1 | Updated: 6 October 2026
+Version: 1.2 | Updated: 17 November 2026
 
 ## Purpose and priorities
 
@@ -29,6 +29,43 @@ Use **Define → Baseline → Design → Implement → Review → Verify → Pac
 - Implement complete flows with errors, recovery, cleanup, and clear status. Separate UI, transport, control state, and persistence where needed.
 - Bound retries, queues, buffers, and timeouts. Keep diagnostics, network calls, and storage from blocking UI/control loops.
 - Validate external input and permissions. Never commit secrets/signing keys or expose sensitive logs. Sanitization is focused cleanup, not an unrelated rewrite.
+
+## 2.1. Code sections and targeted manual edits
+
+Organize authored code into small, coherent sections separated by blank lines, like paragraphs. Each substantial section that a maintainer may tune gets a searchable heading and a short plain-language comment explaining its purpose, what to edit, and the expected result. Keep normal language syntax, formatting, functions, classes, and module boundaries; "paragraph form" means readable groups of code with comments.
+
+- Use a consistent local pattern such as `UI — Theme colors`, `UI — Spacing`, `UI — Typography`, `Connection — Retry policy`, or `Control — Input mapping`. Prefer existing project conventions. One or two sentences usually suffice; do not annotate every obvious statement.
+- Put frequently adjusted values in the existing authoritative theme, style, configuration, or constants location. Give each setting a descriptive name; explain units, effect, scope, and meaningful limits where useful. Reuse it where intended. Do not introduce duplicate settings, unused knobs, new frameworks, or extra indirection solely to satisfy this rule.
+- For UI work, make colors, padding/spacing, font size/weight, dimensions, and component variants easy to find when relevant. Distinguish padding (inside) from margin/gap (outside), and global settings from local overrides. Preserve contrast, responsive layout, focus/disabled/error states, and light/dark behavior.
+- Keep presentation, behavior, transport, and storage separate at useful existing boundaries. Prefer cohesive functions/components and native styles/resources over a single growing file or excessive tiny files.
+- Use valid comments for the language. For JSON or other formats without comments, place the explanation in adjacent documentation or an existing supported schema description. Never hand-edit generated, vendored, minified, or lock files; edit their source and regenerate through the established workflow.
+- For control, timing, electrical limits, persistence, or security settings, document dependencies and required validation. A comment is guidance, not proof that an arbitrary value is safe.
+
+Illustrative CSS; adapt names, values, and comment syntax to the actual project:
+
+```css
+/* UI — Theme colors
+   Edit --ui-accent to change the shared accent. Check contrast in each theme. */
+:root {
+  --ui-accent: #175cd3;
+}
+
+/* UI — Button spacing and text
+   Padding adds room inside buttons (px); font weight changes text emphasis. */
+.primary-button {
+  background-color: var(--ui-accent);
+  padding: 10px 16px;
+  font-weight: 600;
+}
+```
+
+For new projects, establish this pattern in the initial structure. For existing projects, apply it to the sections being created or meaningfully edited; preserve established organization and avoid repository-wide reformatting, renaming, or comment-only churn. Expand the structure only when actual growth or duplication warrants it.
+
+Before editing, locate the authoritative symbol/selector and its usages, inspect local overrides and applicable instructions, then make the smallest complete change. Avoid whole-file rewrites, unrelated cleanup, and broad formatting changes. A necessary refactor or regeneration may affect more lines; explain the dependency and review the actual diff. Prefer focused patches in delivery when source is requested; supply a complete file when requested or needed for a small standalone deliverable.
+
+Keep a compact manual-edit guide in the README for small projects, or `docs/CODE_EDIT_GUIDE.md` as the project grows. Update only entries affected by the work. Use a table with **desired result | file | section/symbol/property | edit and units/scope | related settings and check**. Cover common tuning points, rather than inventorying every function. Reference stable symbols or headings; line numbers are optional navigation aids tied to a commit and must never be the only locator. Documentation must describe actual implemented settings.
+
+For delivery, briefly identify where the requested result is controlled and how it was checked. Inspect the final diff for unintended changes; use the existing formatter/linter and affected checks proportionally. For a cosmetic edit, verify the affected layout/states where possible; do not add elaborate tests that merely mirror styling. State any preview/device verification limits.
 
 ## 3. Reproducible setup and CI/CD
 
