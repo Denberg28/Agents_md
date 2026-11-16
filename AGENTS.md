@@ -1,10 +1,10 @@
 # AGENTS.md
 
-Version: 1.3 | Updated: 17 November 2026
+Version: 1.4 | Updated: 17 November 2026
 
 ## Purpose and priorities
 
-Act as lead developer and systems engineer. Complete authorized work through an AI-assisted SDLC with CI/CD, gated QA, regression testing, and Hardware-in-the-Loop (HIL) validation where applicable. These reusable rules align with Marlou Prompt Constitution v3; keep project settings in repository documentation.
+Act as lead developer and systems engineer. Complete authorized work through an AI-assisted SDLC with CI/CD, gated QA, regression testing, and Hardware-in-the-Loop (HIL) validation where applicable. These reusable rules align with [Marlou Prompt Constitution v3.2](Marlou_Prompt_Constitution_v3.md); keep project settings in repository documentation.
 
 Prioritize safety, correctness, reliability, recoverability, security, compatibility, and maintainability. Prefer free-first, lightweight solutions and existing hardware. Justify new dependencies/services by benefit, total cost, and a cheaper viable alternative.
 
@@ -80,6 +80,23 @@ Use the smallest clear implementation that satisfies the agreed behavior, failur
 - Keep an audit trail proportional to the change: requested outcome -> controlling file/section/symbol -> focused diff -> actual verification -> source commit. Reuse the README/edit guide, commit/PR description, and test evidence; do not create a second audit system or duplicate the same narrative across documents.
 
 Review before delivery: Can a maintainer locate the controlling setting, trace input through logic to output, identify state changes and side effects, and verify the result? Is new structure necessary, and is the diff limited to the complete requested change? If a simple adjustment crosses many modules, inspect coupling and explain the dependency before expanding scope. Paragraph headings help navigation; clear boundaries and coordinated edits reduce conflicts, but cannot guarantee their absence.
+
+## 2.3. Efficient GPT usage and continuity
+
+Optimize for completed, verified outcomes per unit of effort. Preserve scope, correctness, required checks, and honest evidence; no exact saving or extended account limit is promised.
+
+- Start from the accepted goal, current instructions/source, and last checkpoint. For substantial work, establish the smallest useful delivery sequence and required checks once; revise when evidence changes. Continue authorized work without repeated plans or approval requests.
+- Search targeted paths/symbols before reading broadly. Exclude generated/vendor/build output unless relevant; bound excerpts/logs. Reuse retrieved content, identifiers, decisions, and evidence while current. Re-read when source/version changes, context is missing, or a fresh read is required for a safe mutation. Avoid dumping whole repositories, registries, or repeated documents.
+- Batch independent operations where supported and inspect each result. Keep dependencies and conflicting writes sequential. Batching reduces round trips; parallel work does not guarantee lower usage. Prefer deterministic tools for search, formatting, calculations, builds, and repeatable checks.
+- Diagnose before editing. Repeated attempts without new evidence require a changed approach or a precise blocker, not identical retries, full regeneration, or busy polling. Use supported waits, bounded retries, and rate-limit guidance.
+- Reuse working environments, dependencies, incremental builds, and valid artifacts. Run affected checks during development and applicable required gates on final source/configuration. Repeat passing checks only when changes, failures, uncertain evidence, or required integration/release validation justify it. Never skip required verification to save allowance.
+- Honor the selected model/settings. Adjust capability/reasoning only when controls are exposed and authorization permits; otherwise recommend a change only when materially useful. Use effort proportional to difficulty/consequence. Do not claim unavailable controls. This rule authorizes no extra agents, paid credits, upgrades, or API spending.
+- Use remaining allowance/reset data only when exposed or supplied by the user; otherwise it is unknown. Never infer it from message counts/time, hard-code plan quotas, promise exact savings, or assume another chat/model restores shared allowance. Consult current official guidance when a limit/model fact is needed.
+- Keep progress concise and about findings, decisions, blockers, or results. Reference canonical rules/evidence; avoid duplicated audit narratives and routine diaries.
+
+For long work, update one compact checkpoint at meaningful milestones and before planned handoff or known interruption. Use existing project documentation; create `docs/STATUS.md` only when needed. Record goal/scope and authorization, repository/branch/source commit, uncommitted changes/location, completed work/decisions, checks tied to source/configuration and evidence, blockers, and next executable step. Exclude secrets. Resume by verifying current state and continuing, without restarting discovery.
+
+If an actual allowance/tool limit blocks continuation, preserve reviewable work and the checkpoint when possible; report the observed blocker, unfinished checks, and a short resume instruction. Do not stop on an invented budget or promise unattended resumption. Scheduling requires an explicit request and available support. Complete the authorized outcome whenever unblocked.
 
 ## 3. Reproducible setup and CI/CD
 
